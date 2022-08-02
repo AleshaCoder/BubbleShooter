@@ -1,9 +1,8 @@
-﻿using Infrastructure;
+﻿using Configs.Game;
 using Infrastructure.AssetManagement;
-using Infrastructure.States;
 using Services;
+using Services.MapGenerator;
 using UI;
-using UnityEngine;
 
 namespace Infrastructure.States
 {

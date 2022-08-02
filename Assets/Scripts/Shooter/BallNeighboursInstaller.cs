@@ -1,20 +1,22 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using Services.MapGenerator;
 using UnityEngine;
 
-public class BallNeighboursInstaller : MonoBehaviour
+namespace Shooter
 {
-    [SerializeField] private NeighboursFinder _neighboursFinder;
-    [SerializeField] private MapCellBehaviour _mapCellBehaviour;
-
-    private void OnEnable() => _neighboursFinder.OnFound += Install;
-
-    private void OnDisable() => _neighboursFinder.OnFound -= Install;
-
-    private void Install(IReadOnlyCollection<MapCellBehaviour> obj)
+    public class BallNeighboursInstaller : MonoBehaviour
     {
-        foreach (var cell in obj)
-            _mapCellBehaviour.AddNeighbour(cell);
+        [SerializeField] private NeighboursFinder _neighboursFinder;
+        [SerializeField] private MapCellBehaviour _mapCellBehaviour;
+
+        private void OnEnable() => _neighboursFinder.OnFound += Install;
+
+        private void OnDisable() => _neighboursFinder.OnFound -= Install;
+
+        private void Install(IReadOnlyCollection<MapCellBehaviour> obj)
+        {
+            foreach (var cell in obj)
+                _mapCellBehaviour.AddNeighbour(cell);
+        }
     }
 }

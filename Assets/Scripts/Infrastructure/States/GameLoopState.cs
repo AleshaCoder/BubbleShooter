@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.MapGenerator;
 
 namespace Infrastructure.States
 {

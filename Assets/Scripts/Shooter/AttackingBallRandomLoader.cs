@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackingBallRandomLoader : MonoBehaviour
+namespace Shooter
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AttackingBallRandomLoader : MonoBehaviour
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

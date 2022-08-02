@@ -1,25 +1,26 @@
 using UnityEngine;
 using TMPro;
-using System.Text.RegularExpressions;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
-public class ActiveLinks : MonoBehaviour, IPointerClickHandler
+namespace UI
 {
-    [SerializeField]
-    private TextMeshProUGUI textMessage;
-
-    public void OnPointerClick(PointerEventData eventData)
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class ActiveLinks : MonoBehaviour, IPointerClickHandler
     {
-        int linkIndex = TMP_TextUtilities.FindIntersectingLink(textMessage, eventData.position, eventData.pressEventCamera);
-        if (linkIndex == -1)
-            return;
-        TMP_LinkInfo linkInfo = textMessage.textInfo.linkInfo[linkIndex];
-        string selectedLink = linkInfo.GetLinkID();
-        if (selectedLink != "")
+        [SerializeField]
+        private TextMeshProUGUI textMessage;
+
+        public void OnPointerClick(PointerEventData eventData)
+            => TryOpenLink(eventData);
+        private void TryOpenLink(PointerEventData eventData)
         {
-            Debug.LogFormat("Open link {0}", selectedLink);
-            Application.OpenURL(selectedLink);
+            int linkIndex = TMP_TextUtilities.FindIntersectingLink(textMessage, eventData.position, eventData.pressEventCamera);
+            if (linkIndex == -1)
+                return;
+            TMP_LinkInfo linkInfo = textMessage.textInfo.linkInfo[linkIndex];
+            string selectedLink = linkInfo.GetLinkID();
+            if (selectedLink != "")
+                Application.OpenURL(selectedLink);
         }
     }
 }

@@ -1,34 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
 
-public class MapFromFileLoader: IMapLoader
+namespace Services.MapGenerator
 {
-    public Map Load(string path)
+    public class MapFromFileLoader : IMapLoader
     {
-        int width, height;
-        string text;
-        using (TextReader reader = File.OpenText(path))
+        public Map Load(string path)
         {
-            width = int.Parse(reader.ReadLine());
-            height = int.Parse(reader.ReadLine());
-            text = reader.ReadToEnd();
-        }
-
-        Map map = new Map(width, height);
-
-        foreach (char ch in text)
-        {
-            if (int.TryParse(ch.ToString(), out int id))
+            int width, height;
+            string text;
+            using (TextReader reader = File.OpenText(path))
             {
-                MapCell mapCell = new MapCell(id);
-                map.Add(mapCell);
+                width = int.Parse(reader.ReadLine());
+                height = int.Parse(reader.ReadLine());
+                text = reader.ReadToEnd();
             }
+
+            Map map = new Map(width, height);
+
+            foreach (char ch in text)
+            {
+                if (int.TryParse(ch.ToString(), out int id))
+                {
+                    MapCell mapCell = new MapCell(id);
+                    map.Add(mapCell);
+                }
+            }
+
+            map.FindNeighbours();
+
+            return map;
         }
-
-        map.FindNeighbours();
-
-        return map;
     }
 }

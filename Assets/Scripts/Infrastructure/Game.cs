@@ -1,3 +1,4 @@
+using Configs.Game;
 using Infrastructure.States;
 using Logic;
 using Services;

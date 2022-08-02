@@ -1,35 +1,35 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Logic;
 using UnityEngine;
 using DG.Tweening;
 
-public class BallMovement : MonoBehaviour
+namespace Shooter
 {
-    [SerializeField] private BallAiming _ballAiming;
-    [SerializeField] private Collision2DObserver _collision2DObserver;
-
-    private Tweener _tween;
-
-    private void OnEnable()
+    public class BallMovement : MonoBehaviour
     {
-        _ballAiming.OnAimingEnd += StartMovement;
-        _collision2DObserver.CollisionEnter += StopMovement;
-    }
+        [SerializeField] private BallAiming _ballAiming;
+        [SerializeField] private Collision2DObserver _collision2DObserver;
 
-    private void OnDisable()
-    {
-        _ballAiming.OnAimingEnd -= StartMovement;
-        _collision2DObserver.CollisionEnter -= StopMovement;
-    }
+        private Tweener _tween;
 
-    private void StartMovement(AttackData attackData)
-    {
-        _tween = transform.DOPath(attackData.Trajection, 10f, PathType.Linear).SetSpeedBased().Play();
-    }
+        private void OnEnable()
+        {
+            _ballAiming.OnAimingEnd += StartMovement;
+            _collision2DObserver.CollisionEnter += StopMovement;
+        }
 
-    private void StopMovement(Collision2D obj)
-    {
+        private void OnDisable()
+        {
+            _ballAiming.OnAimingEnd -= StartMovement;
+            _collision2DObserver.CollisionEnter -= StopMovement;
+        }
+
+        private void StartMovement(AttackData attackData)
+        {
+            _tween = transform.DOPath(attackData.Trajection, 10f, PathType.Linear).SetSpeedBased().Play();
+        }
+
+        private void StopMovement(Collision2D obj)
+        {
+        }
     }
 }

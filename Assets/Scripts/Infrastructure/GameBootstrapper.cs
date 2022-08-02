@@ -1,4 +1,5 @@
-﻿using Infrastructure.States;
+﻿using Configs.Game;
+using Infrastructure.States;
 using Logic;
 using UnityEngine;
 
